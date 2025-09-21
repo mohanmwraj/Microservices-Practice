@@ -1,0 +1,8 @@
+- Custom exception message is not displayed on the web.
+
+201 - created status
+404 - not found
+@ResponseStatus(code = HttpStatus.NOT_FOUND)
+
+- Dev Tools Automatically disabled in production.
+- ResponseEntityExceptionHandler: handles all exceptions related to the MVC.

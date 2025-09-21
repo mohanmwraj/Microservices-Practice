@@ -31,15 +31,25 @@ public class UserResource {
         return user;
     }
 
-    @PostMapping("/users")
+    @PostMapping("/create-users")
     public ResponseEntity<Object> createUser(@RequestBody User user){
         User savedUser = service.save(user);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id")
+                .path("/{id}")
                 .buildAndExpand(savedUser.getId())
                 .toUri();
 
         return ResponseEntity.created(location).build();
+    }
+
+    @PostMapping("/users")
+    public void createUsers(@RequestBody User user){
+        service.save(user);
+    }
+
+    @DeleteMapping("/users/{id}")
+    public void deleteUser(@PathVariable int id){
+        service.deleteById(id);
     }
 }
