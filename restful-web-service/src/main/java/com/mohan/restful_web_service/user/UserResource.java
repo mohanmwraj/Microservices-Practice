@@ -1,5 +1,6 @@
 package com.mohan.restful_web_service.user;
 
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -31,8 +32,8 @@ public class UserResource {
         return user;
     }
 
-    @PostMapping("/create-users")
-    public ResponseEntity<Object> createUser(@RequestBody User user){
+    @PostMapping("/users")
+    public ResponseEntity<Object> createUser(@Valid @RequestBody User user){
         User savedUser = service.save(user);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -43,10 +44,10 @@ public class UserResource {
         return ResponseEntity.created(location).build();
     }
 
-    @PostMapping("/users")
-    public void createUsers(@RequestBody User user){
-        service.save(user);
-    }
+//    @PostMapping("/users")
+//    public void createUsers(@RequestBody User user){
+//        service.save(user);
+//    }
 
     @DeleteMapping("/users/{id}")
     public void deleteUser(@PathVariable int id){
